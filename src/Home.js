@@ -9,7 +9,7 @@ const OuterContainer = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-image: url("https://images.unsplash.com/photo-1533543166551-aee8cb8b31fc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1976&q=80");
+  background-image: url("https://images.unsplash.com/photo-1518193286583-1131c17469e3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80");
   background-size: cover;
 `;
 
