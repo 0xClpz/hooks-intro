@@ -43,7 +43,6 @@ export const Exercise3 = () => {
       <ul>
         <li>{' '} - ✅ Should call getCharacter and call setCharacterInfo with the result</li>
         <li>{' '} - ✅ Should display a spinner while the data are loading</li>
-        <li>{' '} - ✅ Should set the selected button as "active" when selectedId === #id</li>
       </ul>
       {[1, 2, 3, 4, 5].map(id => (
         <ActiveButton
