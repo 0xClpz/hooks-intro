@@ -50,6 +50,10 @@ export const Home = () => (
             <h3>4.</h3>
             <span>Use Boolean</span>
           </Box>
+          <Box onClick={() => navigate("/exercise-5")}>
+            <h3>5.</h3>
+            <span>Use Timer</span>
+          </Box>
         </div>
       </section>
     </InnerContainer>

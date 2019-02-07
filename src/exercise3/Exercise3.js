@@ -24,16 +24,31 @@ const CharBox = styled.pre`
   margin: 1rem;
 `;
 
-export const Exercise3 = () => {
-  const [selectedId, setSelected] = useState(null);
-  const loading = false;
+const useSW = (id) => {
+  const [loading, setLoading] = useState(false);
   const [characterInfo, setCharacterInfo] = useState({});
 
-  useEffect(() => {
-    /**
-     * Call getCharacter with selectedId and store the result of this call inside of setCharacterInfo
-     */
-  });
+  useEffect(
+    () => {
+      if (!id) return;
+      setLoading(true);
+      getCharacter(id)
+        .then(data => setCharacterInfo(data))
+        .then(() => setLoading(false));
+    },
+    [id]
+  );
+
+  return {
+    loading, characterInfo
+  }
+}
+
+export const Exercise3 = () => {
+  const [selectedId, setSelected] = useState(null);
+
+  const {loading, characterInfo} = useSW(selectedId)
+
 
   return (
     <Container>
@@ -41,8 +56,12 @@ export const Exercise3 = () => {
       <h1>3. Use Effect</h1>
       <p>It</p>
       <ul>
-        <li>{' '} - ✅ Should call getCharacter and call setCharacterInfo with the result</li>
-        <li>{' '} - ✅ Should display a spinner while the data are loading</li>
+        <li>
+          {" "}
+          - ✅ Should call getCharacter and call setCharacterInfo with the
+          result
+        </li>
+        <li> - ✅ Should display a spinner while the data are loading</li>
       </ul>
       {[1, 2, 3, 4, 5].map(id => (
         <ActiveButton
