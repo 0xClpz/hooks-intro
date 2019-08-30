@@ -24,9 +24,10 @@ const CharBox = styled.pre`
   margin: 1rem;
 `;
 
-const useSW = (id) => {
+const useSW = id => {
   const [loading, setLoading] = useState(false);
   const [characterInfo, setCharacterInfo] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(
     () => {
@@ -34,21 +35,27 @@ const useSW = (id) => {
       setLoading(true);
       getCharacter(id)
         .then(data => setCharacterInfo(data))
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
+        .catch(error => {
+          setError(error.response.data.detail);
+          console.log();
+          setLoading(false);
+        });
     },
     [id]
   );
 
   return {
-    loading, characterInfo
-  }
-}
+    loading,
+    characterInfo,
+    error
+  };
+};
 
 export const Exercise3 = () => {
   const [selectedId, setSelected] = useState(null);
 
-  const {loading, characterInfo} = useSW(selectedId)
-
+  const { loading, characterInfo, error } = useSW(selectedId);
 
   return (
     <Container>
@@ -63,7 +70,7 @@ export const Exercise3 = () => {
         </li>
         <li> - ✅ Should display a spinner while the data are loading</li>
       </ul>
-      {[1, 2, 3, 4, 5].map(id => (
+      {[1, 2, 3, 4, 5, "error"].map(id => (
         <ActiveButton
           data-testid={`button-${id}`}
           active={selectedId === id}
@@ -74,6 +81,7 @@ export const Exercise3 = () => {
         </ActiveButton>
       ))}
       <CharBox data-testid="char-info">
+        {error && error}
         {loading ? <Spinner /> : JSON.stringify(characterInfo, null, 2)}
       </CharBox>
     </Container>
